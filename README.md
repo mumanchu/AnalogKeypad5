@@ -84,6 +84,8 @@ AnalogKeypad5::Key AnalogKeypad5::readKey()
 {
     // calculate millivolts
     // this depends on your VCC and the ADC resolution
+    // 3300 = analog reference voltage, use 5000 for 5V
+    // 1023 = max ADC count at reference voltage, 1023=10 bit, 4095=12 bit
     int mv = (analogRead(pin) * 3300) / 1023;
 
     if (mv > 2845)
@@ -119,6 +121,8 @@ MyAnalogKeypad5::Key MyAnalogKeypad5::readKey()
 {
     // calculate millivolts
     // this depends on your VCC and the ADC resolution
+    // 3300 = analog reference voltage, use 5000 for 5V
+    // 1023 = max ADC count at reference voltage, 1023=10 bit, 4095=12 bit
     int mv = (analogRead(pin) * 3300) / 1023;
 
     if (mv > 2845)
