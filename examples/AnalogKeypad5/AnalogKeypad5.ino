@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Example for AnalogKeypad5 class
+// Example sketch for AnalogKeypad5 library
 // Copyright (C) https://muman.ch + https://github.com/mumanchu, 2026.10.28
 // If you re-use this software please include the above copyright notice
 //
