@@ -57,6 +57,7 @@ bool AnalogKeypad5::begin(uint kbPin, uint pollRateMs /*=100*/)
 	if (pollRateMs < 1 || pollRateMs > 500)
 		return false;
 	pin = kbPin;
+	//pinMode(pin, INPUT_ANALOG);
 	pollRate = pollRateMs;
 	lastKey = Key::None;
 	lastPoll = 0;
