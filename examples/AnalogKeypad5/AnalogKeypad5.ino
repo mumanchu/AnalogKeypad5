@@ -54,7 +54,7 @@ void setup()
 
 	// PuTTY clear screen and scrollback
 	// comment this out if you are not using PuTTY
-	Serial.print("\033[2J\033[H\033[3J");
+	//Serial.print("\033[2J\033[H\033[3J");
 
 	Serial.println("\n\rAnalogKeypad5 Started\n\r");
 	Serial.flush();
@@ -88,7 +88,9 @@ void loop()
 	// has a key been pressed?
 	AnalogKeypad5::Key key = keypad.pollKey();
 	if (key) {
-		Serial.printf("%02X\n\r", key);
+		char buf[16];
+		sprintf(buf, "%02X", key);
+		Serial.println(buf);
 		Serial.flush();
 	}
 
