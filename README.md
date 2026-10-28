@@ -20,28 +20,38 @@ This library has some advantages over other libraries:
 You can also adapt it for keypads with any number of keys.
 
 
-# Typical Circuits
+# Typical Circuit
 
-The keypad I used (from AliExpress) happens to have exactly the same circuit as the Gravity: Analog ADKeyboard Module (SKU: DFR0075), although it looks completely different: \
-https://wiki.dfrobot.com/dfr0075/
+The keypad I used (from AliExpress) happens to have exactly the same circuit as the Gravity: Analog ADKeyboard Module (SKU: DFR0075), although it looks completely different.
 
 <img height="300" alt="image" src="images/analog-keypad5-ckt.png" />
+
 
 
 ## Adapting the code for different key voltages, ADC reference voltages and ADC resolutions
 
 The voltage output for each key must be measured.
 
-Connect GND and connect VCC to 3.3V or 5V, depending on your MCU's VCC. Connect a voltmeter between the OUT pin (+) and GND (COM). 
-
-If you don't have a voltmeter, then connect OUT to the A0 analog input, and run this simple sketch to display the voltage. Modify it according to your MCU's voltage and the ADC's resolution.
+Connect GND and connect VCC to 3.3V or 5V, depending on your MCU's VCC. Connect OUT to the A0 analog input, and enable this test code in the example sketch. You may need to modify it for your VCC (3300 or 5000mv) and ADC resolution (10-bit = 1023 or 12-bit = 4095).
 
 ```cpp
-
-
+// enable this to measure the key voltages in millivolts
+#if 1
+pinMode(A0, INPUT_ANALOG);
+while (1) {
+    // calculate millivolts
+    // this depends on your VCC and the ADC resolution
+    // 3300 = analog reference voltage, use 5000 for 5V
+    // 1023 = max ADC count at reference voltage, 1023=10 bit, 4095=12 bit
+    int mv = (analogRead(A0) * 3300) / 1023;
+    Serial.println(mv);
+    Serial.flush();
+    delay(1000);
+}
+#endif
 ```
 
-As each key is pressed, write down the voltage it produces in millivolts, e.g. 0.47V = 470, 1.07V = 1070, etc. See the values in the Millivolts column of the table below.
+As each key is pressed, write down the voltage it produces in millivolts. See the values in the Millivolts column of the table below.
 
 Now calculate the millivolt reading that is half way between each key. See the values in the Midpoint column. These are the values you will use in the software. 
 
@@ -52,11 +62,11 @@ These are the results I got for my keypad,
 | Key     | Millivolts  | Midpoint   | Key Name    |
 |:------- |:---------   | ---------: | :---------- |
 | SW1     | 0           |            | Left        |
-| SW2     | 470         | 235        | Up          |
-| SW3     | 1070        | 770        | Down        |
-| SW4     | 1640        | 1355       | Right       |
-| SW5     | 2400        | 2020       | Next        |
-| none    | 3300        | 2850       |no key pressed |
+| SW2     | 464         | 232        | Up          |
+| SW3     | 1058        | 760        | Down        |
+| SW4     | 1625        | 1340       | Right       |
+| SW5     | 2390        | 2008       | Next        |
+| none    | 3300        | 2845       |no key pressed |
 
 
 
@@ -68,25 +78,25 @@ Now modify the library code in `readKey()` to use your own half-way values, star
 // or it can be overridden in a derived class
 AnalogKeypad5::Key AnalogKeypad5::readKey()
 {
-	// calculate millivolts
-	// this depends on your VCC and the ADC resolution
-	int mv = (analogRead(pin) * 3300) / 1023;
+    // calculate millivolts
+    // this depends on your VCC and the ADC resolution
+    int mv = (analogRead(pin) * 3300) / 1023;
 
-	if (mv > 2850)
-		return Key::None;
-	if (mv > 2020)
-		return Key::Next;
-	if (mv > 1355)
-		return Key::Right;
-	if (mv > 770)
-		return Key::Down;
-	if (mv > 235)
-		return Key::Up;
-	return Key::Left;
+    if (mv > 2845)
+        return Key::None;
+    if (mv > 2008)
+        return Key::Next;
+    if (mv > 1340)
+        return Key::Right;
+    if (mv > 760)
+        return Key::Down;
+    if (mv > 232)
+        return Key::Up;
+    return Key::Left;
 }
 ```
 
-Instead of modifying the library code, you can create a derived class and override `readKey()`, as shown in the example sketch.
+Instead of modifying the library code (which is naughty), you can create a derived class and override `readKey()`, as shown in the example sketch.
 
 ```cpp
 #include "AnalogKeypad5.h"
@@ -95,7 +105,7 @@ Instead of modifying the library code, you can create a derived class and overri
 class MyAnalogKeypad5 : public AnalogKeypad5
 {
 protected:
-	MyAnalogKeypad5::Key readKey();
+    MyAnalogKeypad5::Key readKey();
 };
 
 // Get the key code according to the analog input voltage
@@ -103,21 +113,21 @@ protected:
 // or it can be overridden in a derived class
 MyAnalogKeypad5::Key MyAnalogKeypad5::readKey()
 {
-	// calculate millivolts
-	// this depends on your VCC and the ADC resolution
-	int mv = (analogRead(pin) * 3300) / 1023;
+    // calculate millivolts
+    // this depends on your VCC and the ADC resolution
+    int mv = (analogRead(pin) * 3300) / 1023;
 
-	if (mv > 2850)
-		return Key::None;
-	if (mv > 2020)
-		return Key::Next;
-	if (mv > 1355)
-		return Key::Right;
-	if (mv > 770)
-		return Key::Down;
-	if (mv > 235)
-		return Key::Up;
-	return Key::Left;
+    if (mv > 2845)
+        return Key::None;
+    if (mv > 2008)
+        return Key::Next;
+    if (mv > 1340)
+        return Key::Right;
+    if (mv > 760)
+        return Key::Down;
+    if (mv > 232)
+        return Key::Up;
+    return Key::Left;
 }
 
 MyAnalogKeypad5 keypad;
@@ -133,32 +143,32 @@ For more details, see the comments for each method in the [source code](src/Anal
 class AnalogKeypad5
 {
 public:
-	// repeat key timing in milliseconds
-	uint repeatKeyDelayMs = 500;	// > repeatKeyRateMs
-	uint repeatKeyRateMs = 100;		// >= pollRateMs
+    // repeat key timing in milliseconds
+    uint repeatKeyDelayMs = 500;    // > repeatKeyRateMs
+    uint repeatKeyRateMs = 100;        // >= pollRateMs
 
-	// Bit flags are used, for repeat key handling
-	typedef enum : uint
-	{
-		None = 0x00,
-		Up = 0x01,
-		Down = 0x02,
-		Left = 0x04,
-		Right = 0x08,
-		Next = 0x10		// sometimes called Enter, Back, Select, etc.
+    // Bit flags are used, for repeat key handling
+    typedef enum : uint
+    {
+        None = 0x00,
+        Up = 0x01,
+        Down = 0x02,
+        Left = 0x04,
+        Right = 0x08,
+        Next = 0x10        // sometimes called Enter, Back, Select, etc.
 
-	} Key;
+    } Key;
 
-	bool begin(uint kbPin, uint pollRateMs = 100);
-	Key pollKey();
-	void enableRepeatKey(Key key);
-	void disableRepeatKey(Key key);
-	bool isRepeatKey(Key key);
+    bool begin(uint kbPin, uint pollRateMs = 100);
+    Key pollKey();
+    void enableRepeatKey(Key key);
+    void disableRepeatKey(Key key);
+    bool isRepeatKey(Key key);
 
 protected:
-	// this can be overridden in a derived class,
-	// for different boards, VCC voltages and ADC resolutions
-	virtual Key readKey();
+    // this can be overridden in a derived class,
+    // for different boards, VCC voltages and ADC resolutions
+    virtual Key readKey();
 };
 ```
 
@@ -169,19 +179,22 @@ See [AnalogKeypad5.ino](examples/AnalogKeypad5/AnalogKeypad5.ino).
 
 The example sketch shows how to create a derived class and override `readKey()` to configure it for your own MCU and keyboard. 
 
-It enables the Up and Down keys to repeat, with a slightly longer repeat key delay (750mS instead of 500).
+It also enables the Up and Down keys to repeat, with a slightly longer repeat key delay (750mS instead of 500).
 
 
 ## Revision History
 
 | Date       | Version  | Details |
 |:---------- |:---------|:----------- |
-| 2026.10.28 | 1.0.0	| First release |
+| 2026.10.28 | 1.0.0    | First release |
 
 <br/>
 
 
 ## Joke of the Week
+
+To err is human. To really screw things up requires a computer.
+
 
 
 
