@@ -14,6 +14,7 @@ This library has some advantages over other libraries:
 * Ignores multiple keys pressed at the same time, only one key can be active at a time
 * Configurable repeating keys: hold the key down for a short time then the key repeats at a configurable rate, the default is no keys repeat
 * Easily adapted for different keypad circuits, key voltages, MCU voltages and ADC resolutions
+* Runs on 16 and 32-bit processors
 
 You can also adapt it for keypads with any number of keys.
 
