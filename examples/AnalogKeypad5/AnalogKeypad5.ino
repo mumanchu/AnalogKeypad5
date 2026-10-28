@@ -68,7 +68,7 @@ void setup()
 		// this depends on your VCC and the ADC resolution
 		// 3300 = analog reference voltage, use 5000 for 5V
 		// 1023 = max ADC count at reference voltage, 1023=10 bit, 4095=12 bit
-		int mv = (analogRead(A0) * 3300) / 1023;
+		int mv = ((long)analogRead(A0) * 3300) / 1023;
 		Serial.println(mv);
 		Serial.flush();
 		delay(1000);
