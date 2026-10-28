@@ -37,7 +37,6 @@ Connect GND and connect VCC to 3.3V or 5V, depending on your MCU's VCC. Connect 
 ```cpp
 // enable this to measure the key voltages in millivolts
 #if 1
-pinMode(A0, INPUT_ANALOG);
 while (1) {
     // calculate millivolts
     // this depends on your VCC and the ADC resolution
