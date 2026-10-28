@@ -7,6 +7,10 @@
 //
 // See https://github.com/mumanchu/AnalogKeypad5
 
+typedef unsigned int uint;
+typedef unsigned long ulong;
+
+
 class AnalogKeypad5
 {
 public:
@@ -50,14 +54,13 @@ protected:
 // Initialize
 bool AnalogKeypad5::begin(uint kbPin, uint pollRateMs /*=100*/)
 {
-	if (!pinIsAnalogInput(kbPin) || pollRateMs < 1 || pollRateMs > 500)
+	if (pollRateMs < 1 || pollRateMs > 500)
 		return false;
 	pin = kbPin;
-	pinMode(kbPin, INPUT_ANALOG);
 	pollRate = pollRateMs;
 	lastKey = Key::None;
 	lastPoll = 0;
-	repeatKeys = 0;
+	repeatKeys = 0;		// default = no keys repeat
 	return true;
 }
 
@@ -137,7 +140,6 @@ void AnalogKeypad5::enableRepeatKey(Key key)
 	if ((uint)key == 0)
 		key = (Key)0x1f;
 	repeatKeys |= (uint)key;
-	//repeatStart = 0;
 }
 void AnalogKeypad5::disableRepeatKey(Key key)
 {
