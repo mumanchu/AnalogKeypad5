@@ -11,7 +11,7 @@ The keypad output is connected to a single analog input. Each key forms part of 
 
 This library has some advantages over other libraries:
 
-* Ignores multiple keys pressed at the same time, only one key can be active at one time
+* Ignores multiple keys pressed at the same time, only one key can be active at a time
 * Configurable repeating keys: hold the key down for a short time then the key repeats at a configurable rate, the default is no keys repeat
 * Easily adapted for different keypad circuits, key voltages, MCU voltages and ADC resolutions
 
@@ -20,7 +20,7 @@ You can also adapt it for keypads with any number of keys.
 
 # Typical Circuit
 
-The keypad I used (from AliExpress) happens to have exactly the same circuit as the 'DFRobot Gravity: Analog ADKeyboard Module (SKU: DFR0075)' board, although it looks completely different. 
+The keypad I used (from AliExpress) happens to have exactly the same circuit as the 'DFRobot Gravity: Analog ADKeyboard Module (SKU: DFR0075)' board, although the boards look completely different. 
 
 In the pictures above, the DFRobot board is on the left, my board is on the right. I prefer the key layout on my (much cheaper) board. 
 
