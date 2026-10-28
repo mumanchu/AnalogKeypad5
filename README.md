@@ -74,7 +74,7 @@ These are the results I got for my keypad,
 
 Now modify the library code in `readKey()` to use your own half-way values, starting with the 'no key pressed' value (the most common state). 
 
-For some keypads you may have to use `<` instead of `>`, and go from low to high instead of high to low.
+For some keypads, you may have to use `<` instead of `>` and go from low to high instead of high to low.
 
 ```cpp
 // Get the key code according to the analog input voltage
