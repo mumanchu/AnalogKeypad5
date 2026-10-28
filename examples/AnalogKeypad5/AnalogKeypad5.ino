@@ -59,8 +59,8 @@ void setup()
 	Serial.println("\n\rAnalogKeypad5 Started\n\r");
 	Serial.flush();
 
-	// enable this to measure the key voltages in millivolts
-	#if 1
+	// enable this to measure the key voltages in millivolts on A0
+	#if 0
 	//uncomment this if INPUT_ANALOG is available
 	//pinMode(A0, INPUT_ANALOG);
 	while (1) {
