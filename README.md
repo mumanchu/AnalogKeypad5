@@ -6,14 +6,12 @@ If you need a very cheap keypad for a simple user interface or menu control with
 
 The keypad output is connected to a single analog input. Each key forms part of a resistor voltage divider network. Pressing a key changes the output voltage according to the key.
 
-There are many different keypad circuits, each using different resistor values to produce different output voltages for each key. This means you must measure the output voltage for each key and modify the software according to your board. The software is also dependent on the analog input reference voltage (3.3V or 5V), and the resolution of the analog-to-digital converter (ADC) which is usually 10 or 12 bits.
-
 
 ## Advantages of this library
 
 This library has some advantages over other libraries:
 
-* Ignores multiple key depressions, only one key can be active at a time
+* Ignores multiple keys pressed at the same time, only one key can be active at one time
 * Configurable repeating keys: hold the key down for a short time then the key repeats at a configurable rate
 * Easily adapted for different keypad circuits, key voltages, MCU voltages and ADC resolutions
 
@@ -22,7 +20,9 @@ You can also adapt it for keypads with any number of keys.
 
 # Typical Circuit
 
-The keypad I used (from AliExpress) happens to have exactly the same circuit as the Gravity: Analog ADKeyboard Module (SKU: DFR0075), although it looks completely different.
+The keypad I used (from AliExpress) happens to have exactly the same circuit as the 'DFRobot Gravity: Analog ADKeyboard Module (SKU: DFR0075)' board, although it looks completely different. 
+
+In the pictures above, the DFRobot board is on the left, my board is on the right. I prefer the key layout on my board. 
 
 <img height="300" alt="image" src="images/analog-keypad5-ckt.png" />
 
@@ -30,7 +30,9 @@ The keypad I used (from AliExpress) happens to have exactly the same circuit as 
 
 ## Adapting the code for different key voltages, ADC reference voltages and ADC resolutions
 
-The voltage output for each key must be measured.
+There are many different keypad circuits, each using different resistor values to produce different output voltages for each key. This means you must measure the output voltage for each key and modify the software according to your board. The software is also dependent on the analog input reference voltage (3.3V or 5V), and the resolution of the analog-to-digital converter (ADC) which is usually 10 or 12 bits.
+
+The voltage output for each key must be measured, and the code adapted to match the measurements.
 
 Connect GND and connect VCC to 3.3V or 5V, depending on your MCU's VCC. Connect OUT to the A0 analog input, and enable this test code in the example sketch. You may need to modify it for your VCC (3300 or 5000mv) and ADC resolution (10-bit = 1023 or 12-bit = 4095).
 
@@ -69,7 +71,9 @@ These are the results I got for my keypad,
 
 
 
-Now modify the library code in `readKey()` to use your own half-way values, starting with the 'no key pressed' value (the most common state). For some keypads you may have to use `<` instead of `>`.
+Now modify the library code in `readKey()` to use your own half-way values, starting with the 'no key pressed' value (the most common state). 
+
+For some keypads you may have to use `<` instead of `>`, and go from low to high instead of high to low.
 
 ```cpp
 // Get the key code according to the analog input voltage
