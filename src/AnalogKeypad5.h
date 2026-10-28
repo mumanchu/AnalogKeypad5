@@ -73,7 +73,7 @@ AnalogKeypad5::Key AnalogKeypad5::readKey()
 {
 	// calculate millivolts
 	// this depends on your VCC and the ADC resolution
-	int mv = (analogRead(pin) * 3300) / 1023;
+	int mv = ((long)analogRead(pin) * 3300) / 1023;
 
 	if (mv > 2845)
 		return Key::None;
@@ -111,6 +111,7 @@ AnalogKeypad5::Key AnalogKeypad5::pollKey()
 		lastKey = key;
 		return key;
 	}
+
 	if (lastKey == Key::None && key != lastKey) {
 		// new key pressed only if the last key was released,
 		// because only one key can be depressed at a time
@@ -119,6 +120,7 @@ AnalogKeypad5::Key AnalogKeypad5::pollKey()
 		repeatRate = repeatKeyDelayMs;
 		return key;
 	}
+
 	if (isRepeatKey(key) && key == lastKey) {
 		// repeat key handling
 		if ((t - repeatStart) >= repeatRate) {
