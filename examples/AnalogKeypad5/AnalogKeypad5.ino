@@ -61,7 +61,7 @@ void setup()
 
 	// enable this to measure the key voltages in millivolts
 	#if 0
-	pinMode(A0, INPUT_ANALOG);
+	//pinMode(A0, INPUT_ANALOG);
 	while (1) {
 		// calculate millivolts
 		// this depends on your VCC and the ADC resolution
