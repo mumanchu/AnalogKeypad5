@@ -153,7 +153,7 @@ class AnalogKeypad5
 public:
     // repeat key timing in milliseconds
     uint repeatKeyDelayMs = 500;    // > repeatKeyRateMs
-    uint repeatKeyRateMs = 100;        // >= pollRateMs
+    uint repeatKeyRateMs = 100;     // >= pollRateMs
 
     // Bit flags are used, for repeat key handling
     typedef enum : uint
