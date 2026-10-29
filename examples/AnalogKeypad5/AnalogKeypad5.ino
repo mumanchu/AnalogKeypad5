@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Example sketch for AnalogKeypad5 library
-// Copyright (C) https://muman.ch + https://github.com/mumanchu, 2026.10.28
+// Copyright (C) https://muman.ch + https://github.com/mumanchu, 2026.10.29
 // If you re-use this software please include the above copyright notice
 //
 // See https://github.com/mumanchu/AnalogKeypad5
@@ -81,7 +81,7 @@ void setup()
 	keypad.begin(A0);
 
 	// up and down keys repeat
-	keypad.enableRepeatKey((AnalogKeypad5::Key)(keypad.Down | keypad.Up));
+	keypad.enableRepeatKey((MyAnalogKeypad5::Key)(keypad.Down | keypad.Up));
 	keypad.repeatKeyDelayMs = 750;		// increase delay until repeating starts
 }
 
@@ -89,7 +89,7 @@ void setup()
 void loop()
 {
 	// has a key been pressed?
-	AnalogKeypad5::Key key = keypad.pollKey();
+	MyAnalogKeypad5::Key key = keypad.pollKey();
 	if (key) {
 		char buf[16];
 		sprintf(buf, "%02X", key);
