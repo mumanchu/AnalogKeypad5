@@ -14,7 +14,7 @@ This library has some advantages over other libraries:
 * Ignores multiple keys pressed at the same time, only one key can be active at a time
 * Configurable repeating keys: hold the key down for a short time then the key repeats at a configurable rate, the default is no keys repeat
 * Easily adapted for different keypad circuits, key voltages, MCU voltages and ADC resolutions
-* Runs on 16 and 32-bit processors
+* Runs on 16 or 32-bit processors
 
 You can also adapt it for keypads with any number of keys.
 
@@ -45,7 +45,7 @@ while (1) {
     // this depends on your VCC and the ADC resolution
     // 3300 = analog reference voltage, use 5000 for 5V
     // 1023 = max ADC count at reference voltage, 1023=10 bit, 4095=12 bit
-    int mv = (analogRead(A0) * 3300) / 1023;
+    int mv = ((long)analogRead(A0) * 3300) / 1023;
     Serial.println(mv);
     Serial.flush();
     delay(1000);
@@ -86,7 +86,7 @@ AnalogKeypad5::Key AnalogKeypad5::readKey()
     // this depends on your VCC and the ADC resolution
     // 3300 = analog reference voltage, use 5000 for 5V
     // 1023 = max ADC count at reference voltage, 1023=10 bit, 4095=12 bit
-    int mv = (analogRead(pin) * 3300) / 1023;
+    int mv = ((long)analogRead(pin) * 3300) / 1023;
 
     if (mv > 2845)
         return Key::None;
@@ -123,7 +123,7 @@ MyAnalogKeypad5::Key MyAnalogKeypad5::readKey()
     // this depends on your VCC and the ADC resolution
     // 3300 = analog reference voltage, use 5000 for 5V
     // 1023 = max ADC count at reference voltage, 1023=10 bit, 4095=12 bit
-    int mv = (analogRead(pin) * 3300) / 1023;
+    int mv = ((long)analogRead(pin) * 3300) / 1023;
 
     if (mv > 2845)
         return Key::None;
