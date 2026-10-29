@@ -2,7 +2,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 // Arduino Class for 5-key Analog Keypad
-// Copyright (C) https://muman.ch + https://github.com/mumanchu, 2026.10.28
+// Copyright (C) https://muman.ch + https://github.com/mumanchu, 2026.10.29
 // If you re-use this software please include the above copyright notice
 //
 // See https://github.com/mumanchu/AnalogKeypad5
