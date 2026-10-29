@@ -195,6 +195,7 @@ It also enables the Up and Down keys to repeat, with a slightly longer repeat ke
 | Date       | Version  | Details |
 |:---------- |:---------|:----------- |
 | 2026.10.28 | 1.0.0    | First release |
+| 2021.10.29 | 1.0.1    | int mv = (`(long)`analogRead(pin) * 3300) / 1023; |
 
 <br/>
 
