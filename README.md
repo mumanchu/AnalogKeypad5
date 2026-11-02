@@ -23,11 +23,11 @@ You can also adapt it for keypads with any number of keys.
 
 The schematic for keypad I used (from AliExpress) is below. The 100nF capacitor between OUT and GND provides debounce filtering. 
 
-The DFRobot DFR0075 V2 and V3 board circuitss are similar, but have LED for each key connected between the switch and GND. This drops about 2V, which reduces the range of the resistor-divider voltages.
+The DFRobot DFR0075 V2 and V3 board circuits are similar, but have an LED for each key connected in series with the switch. This drops about 2V, which reduces the span of the resistor-divider voltages.
 
 In the pictures above, the DFRobot DFR0075 (V3) board is on the left, my much cheaper board is on the right. I prefer the key layout of my board. 
 
-<img width="500" alt="image" src="images/analog-keypad5-ckt.png" />
+<img height="500" alt="image" src="images/analog-keypad5-ckt.png" />
 
 
 
@@ -205,5 +205,7 @@ It also enables the Up and Down keys to repeat, with a slightly longer repeat ke
 ## Joke of the Week
 
 To err is human. To _really screw things up_ requires a computer.
+
+
 
 
