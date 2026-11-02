@@ -21,11 +21,13 @@ You can also adapt it for keypads with any number of keys.
 
 # Typical Circuit
 
-The keypad I used (from AliExpress) happens to have exactly the same circuit as the 'DFRobot Gravity: Analog ADKeyboard Module (SKU: DFR0075)' board, although the boards look completely different. Except, my board has a 100nF capacitor between OUT and GND to provide some debounce filtering.
+The schematic for keypad I used (from AliExpress) is below. The 100nF capacitor between OUT and GND provides debounce filtering. 
 
-In the pictures above, the DFRobot board is on the left, my board is on the right. I prefer the key layout on my (much cheaper) board. 
+The DFRobot DFR0075 V2 and V3 board circuitss are similar, but have LED for each key connected between the switch and GND. This drops about 2V, which reduces the range of the resistor-divider voltages.
 
-<img height="300" alt="image" src="images/analog-keypad5-ckt.png" />
+In the pictures above, the DFRobot DFR0075 (V3) board is on the left, my much cheaper board is on the right. I prefer the key layout of my board. 
+
+<img width="500" alt="image" src="images/analog-keypad5-ckt.png" />
 
 
 
@@ -194,8 +196,8 @@ It also enables the Up and Down keys to repeat, with a slightly longer repeat ke
 
 | Date       | Version  | Details |
 |:---------- |:---------|:----------- |
-| 2026.10.28 | 1.0.0    | First release |
 | 2021.10.29 | 1.0.1    | int mv = (`(long)`analogRead(pin) * 3300) / 1023; |
+| 2026.10.28 | 1.0.0    | First release |
 
 <br/>
 
@@ -203,7 +205,5 @@ It also enables the Up and Down keys to repeat, with a slightly longer repeat ke
 ## Joke of the Week
 
 To err is human. To _really screw things up_ requires a computer.
-
-
 
 
