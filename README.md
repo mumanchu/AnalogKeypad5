@@ -21,7 +21,7 @@ You can also adapt it for keypads with any number of keys.
 
 # Typical Circuit
 
-The keypad I used (from AliExpress) happens to have exactly the same circuit as the 'DFRobot Gravity: Analog ADKeyboard Module (SKU: DFR0075)' board, although the boards look completely different. 
+The keypad I used (from AliExpress) happens to have exactly the same circuit as the 'DFRobot Gravity: Analog ADKeyboard Module (SKU: DFR0075)' board, although the boards look completely different. Except, my board has a 100nF capacitor between OUT and GND to provide some debounce filtering.
 
 In the pictures above, the DFRobot board is on the left, my board is on the right. I prefer the key layout on my (much cheaper) board. 
 
@@ -31,7 +31,7 @@ In the pictures above, the DFRobot board is on the left, my board is on the righ
 
 ## Adapting the code for different key voltages, ADC reference voltages and ADC resolutions
 
-There are many different keypad circuits, each using different resistor values to produce different output voltages for each key. This means you must measure the output voltage for each key and modify the software according to your board. The software is also dependent on the analog input reference voltage (3.3V or 5V), and the resolution of the analog-to-digital converter (ADC) which is usually 10 or 12 bits.
+There are many different keypad circuits, each using different resistor values to produce a different output voltage for each key. This means you must measure the output voltage for each key and modify the software according to your board. The software is also dependent on the analog input reference voltage (3.3V or 5V), and the resolution of the analog-to-digital converter (ADC) which is usually 10 or 12 bits.
 
 The voltage output for each key must be measured, and the code adapted to match the measurements.
 
@@ -61,14 +61,14 @@ It is better to use millivolts because it is easy to adapt millivolts for differ
 
 These are the results I got for my keypad,
 
-| Key     | Millivolts  | Midpoint   | Key Name    |
-|:------- |:---------   | ---------: | :---------- |
-| SW1     | 0           |            | Left        |
-| SW2     | 464         | 232        | Up          |
-| SW3     | 1058        | 760        | Down        |
-| SW4     | 1625        | 1340       | Right       |
-| SW5     | 2390        | 2008       | Next        |
-| none    | 3300        | 2845       |no key pressed |
+| Key     | Millivolts mV | Midpoint mV | Key Name    |
+|:------- |:---------     | :---------  | :---------- |
+| SW1     | 0             |             | Left        |
+| SW2     | 464           | 232         | Up          |
+| SW3     | 1058          | 760         | Down        |
+| SW4     | 1625          | 1340        | Right       |
+| SW5     | 2390          | 2008        | Next        |
+| none    | 3300          | 2845        |no key pressed |
 
 
 
@@ -194,8 +194,8 @@ It also enables the Up and Down keys to repeat, with a slightly longer repeat ke
 
 | Date       | Version  | Details |
 |:---------- |:---------|:----------- |
-| 2021.10.29 | 1.0.1    | int mv = (`(long)`analogRead(pin) * 3300) / 1023; |
 | 2026.10.28 | 1.0.0    | First release |
+| 2021.10.29 | 1.0.1    | int mv = (`(long)`analogRead(pin) * 3300) / 1023; |
 
 <br/>
 
